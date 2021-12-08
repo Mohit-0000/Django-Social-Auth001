@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'user',
     
     #third party
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'rest_framework',
+    'allauth.socialaccount.providers.google',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -59,6 +65,21 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'blogPost.urls'
+SITE_ID = 1
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         # For each OAuth based provider, either add a ``SocialApp``
+#         # (``socialaccount`` app) containing the required client
+#         # credentials, or list them here:
+#         'APP': {
+#             'client_id': '123',
+#             'secret': '456',
+#             'key': ''
+#         }
+#     }
+# }
+
 
 TEMPLATES = [
     {
@@ -77,7 +98,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blogPost.wsgi.application'
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
 
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
